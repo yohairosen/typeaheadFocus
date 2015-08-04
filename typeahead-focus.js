@@ -1,12 +1,16 @@
 /**
- * Created by Yohai Rosen.
+ * created by Yohai Rosen.
+ * https://github.com/yohairosen
+ * email: yohairoz@gmail.com
+ * twitter: @distruptivehobo
  *
- * Email: yohairoz@gmail.com
- * Twitter: @distruptivehobo
+ * https://github.com/yohairosen/typeaheadFocus.git
+ * Version: 0.0.1
+ * License: MIT
  */
 
-angular.module('typahead-focus')
-  .directive('typaheadFocus', function () {
+angular.module('typeahead-focus', [])
+  .directive('typeaheadFocus', function () {
     return {
       require: 'ngModel',
       link: function (scope, element, attr, ngModel) {
