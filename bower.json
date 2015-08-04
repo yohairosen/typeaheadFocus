@@ -1,0 +1,24 @@
+{
+  "name": "typeahead-focus",
+  "version": "0.0.1",
+  "authors": [
+    "Yohai Rosen <yohai.roz@gmail.com>"
+  ],
+  "description": "Helper directive that adds an \"focus\" functionality to angular-ui-bootstrap's typahead directive. Activates the typahead's menu on click in addition to the the default keboard initiated mnue.",
+  "main": "typeahead-focus.js",
+  "keywords": [
+    "bootstrap",
+    "angular",
+    "ui-bootstrap",
+    "typahead",
+    "focus"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
