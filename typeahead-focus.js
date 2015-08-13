@@ -22,20 +22,20 @@ angular.module('typeahead-focus', [])
           var viewValue = ngModel.$viewValue;
 
           //restore to null value so that the typeahead can detect a change
-          if (ngModel.$viewValue == ' ') {
+          if (ngModel.$viewValue == '') {
             ngModel.$setViewValue(null);
           }
 
           //force trigger the popup
-          ngModel.$setViewValue(' ');
+          ngModel.$setViewValue('');
 
           //set the actual value in case there was already a value in the input
-          ngModel.$setViewValue(viewValue || ' ');
+          ngModel.$setViewValue(viewValue || '');
         });
 
         //compare function that treats the empty space as a match
         scope.$emptyOrMatch = function (actual, expected) {
-          if (expected == ' ') {
+          if (expected == '') {
             return true;
           }
           return actual.toLowerCase().indexOf(expected.toLowerCase()) > -1;
