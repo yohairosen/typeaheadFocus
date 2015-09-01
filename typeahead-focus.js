@@ -10,36 +10,49 @@
  */
 
 angular.module('typeahead-focus', [])
-  .directive('typeaheadFocus', function () {
-    return {
-      require: 'ngModel',
-      link: function (scope, element, attr, ngModel) {
+    .directive('typeaheadFocus', function () {
+      return {
+        require: 'ngModel',
+        link: function (scope, element, attr, ngModel) {
 
-        //trigger the popup on 'click' because 'focus'
-        //is also triggered after the item selection
-        element.bind('click', function () {
+          // Array of keyCode values for arrow keys
+          const ARROW_KEYS = [37,38,39,40];
 
-          var viewValue = ngModel.$viewValue;
+          function manipulateViewValue(e) {
+            /* we have to check to see if the arrow keys were in the input because if they were trying to select
+             * a menu option in the typeahead, this may cause unexpected behavior if we were to execute the rest
+             * of this function
+             */
+            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 )
+              return;
 
-          //restore to null value so that the typeahead can detect a change
-          if (ngModel.$viewValue == ' ') {
-            ngModel.$setViewValue(null);
+            var viewValue = ngModel.$viewValue;
+
+            //restore to null value so that the typeahead can detect a change
+            if (ngModel.$viewValue == ' ') {
+              ngModel.$setViewValue(null);
+            }
+
+            //force trigger the popup
+            ngModel.$setViewValue(' ');
+
+            //set the actual value in case there was already a value in the input
+            ngModel.$setViewValue(viewValue || ' ');
           }
 
-          //force trigger the popup
-          ngModel.$setViewValue(' ');
+          /* trigger the popup on 'click' because 'focus'
+           * is also triggered after the item selection.
+           * also trigger when input is deleted via keyboard
+           */
+          element.bind({'click': manipulateViewValue, 'keyup': manipulateViewValue});
 
-          //set the actual value in case there was already a value in the input
-          ngModel.$setViewValue(viewValue || ' ');
-        });
-
-        //compare function that treats the empty space as a match
-        scope.$emptyOrMatch = function (actual, expected) {
-          if (expected == ' ') {
-            return true;
-          }
-          return actual.toLowerCase().indexOf(expected.toLowerCase()) > -1;
-        };
-      }
-    };
-  });
+          //compare function that treats the empty space as a match
+          scope.$emptyOrMatch = function (actual, expected) {
+            if (expected == ' ') {
+              return true;
+            }
+            return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) > -1;
+          };
+        }
+      };
+    });

@@ -14,5 +14,5 @@ var myApp = angular.module('myApp', ['typeahead-focus']);
 ```
 ```
 <!-- Use the 'input' element as follows -->
-<input type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue:emptyOrMatch | limitTo:8" typeahead-focus class="form-control" >
+<input type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue:$emptyOrMatch | limitTo:8" typeahead-focus class="form-control" >
 ```
