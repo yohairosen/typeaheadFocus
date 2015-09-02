@@ -44,14 +44,14 @@ angular.module('typeahead-focus', [])
            * is also triggered after the item selection.
            * also trigger when input is deleted via keyboard
            */
-          element.bind({'click': manipulateViewValue, 'keyup': manipulateViewValue});
+          element.bind('click keyup', manipulateViewValue);
 
           //compare function that treats the empty space as a match
           scope.$emptyOrMatch = function (actual, expected) {
             if (expected == ' ') {
               return true;
             }
-            return actual.toString().toLowerCase().indexOf(expected.toLowerCase()) > -1;
+            return actual ? actual.toString().toLowerCase().indexOf(expected.toLowerCase()) > -1 : false;
           };
         }
       };
