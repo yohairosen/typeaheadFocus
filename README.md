@@ -16,3 +16,15 @@ var myApp = angular.module('myApp', ['typeahead-focus']);
 <!-- Use the 'input' element as follows -->
 <input type="text" ng-model="selected" typeahead="item for item in items | filter:$viewValue:$emptyOrMatch | limitTo:8" typeahead-focus class="form-control" >
 ```
+
+## Trigger only if typeahead has value
+
+There are number of cases when showing autocomplete for empty value does not make sense. 
+However, when user enters a value in typeahead, leaves the field and then enters it again - 
+typeahead should show the suggestions again.
+
+If you want the `typeahead-focus` to trigger only when there is some entered value, add the `typeahead-focus-not-empty` attribute, i.e.:
+
+```
+<input type="text" ng-model="selected" typeahead="item for item in items" typeahead-focus typeahead-focus-not-empty class="form-control" >
+```
