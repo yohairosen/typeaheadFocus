@@ -23,8 +23,18 @@ angular.module('typeahead-focus', [])
              * a menu option in the typeahead, this may cause unexpected behavior if we were to execute the rest
              * of this function
              */
-            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 )
+            if (ARROW_KEYS.indexOf(e.keyCode) >= 0) {
               return;
+            }
+
+            /* This ensures that the typeahead will not show suggestions if the field is empty and the
+             * typeahead-focus-not-empty is set. This is helpful when suggesting from empty value does not really make
+             * sense (for example we are selecting from thousands of items from database). However, if user enters
+             * something, leaves and enter the field again - typeahead should show previous suggestions.
+             */
+            if (angular.isDefined(attr.typeaheadFocusNotEmpty) && !ngModel.$viewValue) {
+              return;
+            }
 
             var viewValue = ngModel.$viewValue;
 
