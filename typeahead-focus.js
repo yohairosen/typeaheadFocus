@@ -17,13 +17,14 @@ angular.module('typeahead-focus', [])
 
           // Array of keyCode values for arrow keys
           const ARROW_KEYS = [37,38,39,40];
+          const ENTER_KEY = 13;
 
           function manipulateViewValue(e) {
             /* we have to check to see if the arrow keys were in the input because if they were trying to select
              * a menu option in the typeahead, this may cause unexpected behavior if we were to execute the rest
              * of this function
              */
-            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 )
+            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 || e.keyCode === ENTER_KEY)
               return;
 
             var viewValue = ngModel.$viewValue;
