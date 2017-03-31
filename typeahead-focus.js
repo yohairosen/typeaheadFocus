@@ -24,7 +24,7 @@ angular.module('typeahead-focus', [])
              * a menu option in the typeahead, this may cause unexpected behavior if we were to execute the rest
              * of this function
              */
-            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 || e.keyCode == ENTER_KEY)
+            if( ARROW_KEYS.indexOf(e.keyCode) >= 0 || e.keyCode === ENTER_KEY)
               return;
 
             var viewValue = ngModel.$viewValue;
